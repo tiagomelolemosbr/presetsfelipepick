@@ -172,209 +172,204 @@
 
     .hero-btn:active { opacity: 0.85; }
 
-    /* ── Dobra 2 — Antes x Depois ─────────────────── */
-    .dobra2 {
-      background: #100F0C;
-      padding: 72px 0 80px;
-    }
+    /* ── Dobra 2 — Slider Antes x Depois ────────────── */
+    .dobra2 { background: #100F0C; padding-bottom: 72px; }
 
-    .d2-header {
-      text-align: center;
-      padding: 0 28px;
-      margin-bottom: 40px;
-    }
-
-    .d2-label {
-      display: block;
-      font-family: 'Jost', sans-serif;
-      font-size: 9px;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--golden);
-      font-weight: 400;
-      margin-bottom: 14px;
-    }
+    .d2-header { text-align: center; padding: 48px 28px 0; }
 
     .d2-headline {
       font-family: 'Bodoni Moda', serif;
       font-weight: 400;
-      letter-spacing: 0.02em;
+      font-size: clamp(22px, 5.8vw, 36px);
+      line-height: 1.2;
       color: var(--pelicula);
     }
 
-    .d2-headline-big {
+    .d2-label {
       display: block;
-      font-size: clamp(52px, 13vw, 96px);
-      line-height: 1;
-      margin-bottom: 10px;
-    }
-
-    .d2-headline-sub {
-      display: block;
-      font-size: clamp(15px, 3.8vw, 24px);
-      font-style: italic;
+      font-size: 11px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--golden);
       font-weight: 400;
-      line-height: 1.3;
-      color: rgba(242,234,216,0.65);
-    }
-
-    /* Navegação de foto */
-    .d2-photo-nav {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 20px;
+      margin-top: 16px;
       margin-bottom: 20px;
-      padding: 0 28px;
     }
 
-    .d2-photo-arrow {
-      background: transparent;
-      border: none;
-      color: rgba(196,180,154,0.45);
-      font-size: 20px;
-      cursor: pointer;
-      padding: 4px 8px;
-      transition: color 0.2s ease;
-      line-height: 1;
-    }
+    /* Miniaturas */
+    .d2-thumbs-wrap { padding: 0 16px 20px; }
 
-    .d2-photo-arrow:active { color: var(--golden); }
-
-    .d2-photo-label {
-      font-family: 'Jost', sans-serif;
-      font-size: 10px;
-      letter-spacing: 0.2em;
+    .d2-thumbs-title {
+      font-size: 12px;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--sombra);
       font-weight: 400;
-      min-width: 80px;
-      text-align: center;
+      text-align: left;
+      margin-bottom: 12px;
     }
 
-    /* Viewer */
-    .d2-viewer {
+    .d2-thumbs { display: flex; flex-direction: column; gap: 6px; }
+
+    .d2-thumb-item {
+      position: relative;
+      cursor: pointer;
+      opacity: 0.45;
+      transition: opacity 0.2s ease;
+    }
+
+    .d2-thumb-item.active {
+      opacity: 1;
+      outline: 1.5px solid var(--golden);
+      outline-offset: -1.5px;
+    }
+
+    .d2-thumb-img {
+      width: 100%;
+      height: 72px;
+      object-fit: cover;
+      display: block;
+      pointer-events: none;
+    }
+
+    .d2-thumb-num {
+      position: absolute;
+      top: 6px;
+      left: 8px;
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      color: var(--pelicula);
+      background: rgba(28,26,20,0.65);
+      padding: 2px 6px;
+      backdrop-filter: blur(4px);
+      pointer-events: none;
+    }
+
+    /* Slider */
+    .d2-slider {
       position: relative;
       width: 100%;
       aspect-ratio: 3/2;
       overflow: hidden;
       background: #0a0908;
-      cursor: grab;
+      user-select: none;
+      touch-action: none;
     }
 
-    .d2-viewer:active { cursor: grabbing; }
-
-    .d2-img {
+    .d2-slider-img {
+      position: absolute;
+      inset: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
-      transition: opacity 0.18s ease;
+      pointer-events: none;
     }
 
-    .d2-img.fading { opacity: 0; }
+    .d2-slider-preset { clip-path: inset(0 0 0 50%); }
 
-    /* Badge de estado */
-    .d2-badge {
+    .d2-slider-line {
       position: absolute;
-      bottom: 16px;
-      left: 16px;
-      font-family: 'Jost', sans-serif;
+      top: 0; bottom: 0;
+      left: 50%;
+      width: 2px;
+      background: rgba(242,234,216,0.9);
+      transform: translateX(-50%);
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    .d2-slider-handle {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: var(--pelicula);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 11;
+      pointer-events: none;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.4);
+    }
+
+    .d2-slider-badge {
+      position: absolute;
+      bottom: 14px;
       font-size: 9px;
       font-weight: 400;
-      letter-spacing: 0.2em;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      background: rgba(28,26,20,0.72);
+      background: rgba(28,26,20,0.7);
       color: var(--pelicula);
-      padding: 5px 10px;
-      border: 0.5px solid rgba(196,180,154,0.3);
+      padding: 4px 9px;
       backdrop-filter: blur(4px);
+      border: 0.5px solid rgba(196,180,154,0.25);
+      z-index: 5;
+      pointer-events: none;
     }
 
-    /* Navegação */
-    .d2-nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 24px 20px 0;
-      gap: 12px;
-    }
+    .d2-badge-original { left: 12px; }
+    .d2-badge-preset   { right: 12px; }
 
-    .d2-arrow {
-      background: transparent;
-      border: 0.5px solid rgba(196,180,154,0.3);
-      color: var(--luz-difusa);
-      width: 40px;
-      height: 40px;
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 22px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      line-height: 1;
-      padding-bottom: 2px;
-    }
-
-    .d2-arrow:active {
-      background: rgba(196,180,154,0.12);
-    }
-
-    .d2-nav-center {
-      flex: 1;
+    /* Presets */
+    .d2-preset-nav {
+      padding: 20px 16px 8px;
       display: flex;
       flex-direction: column;
+      gap: 12px;
       align-items: center;
-      gap: 10px;
     }
 
-    /* Dots de progresso */
-    .d2-dots {
+    .d2-preset-title {
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--sombra);
+      font-weight: 400;
+      text-align: left;
+      width: 100%;
+    }
+
+    .d2-preset-strip {
       display: flex;
-      gap: 5px;
-      align-items: center;
+      gap: 6px;
       flex-wrap: wrap;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .d2-preset-btn {
+      flex-shrink: 0;
+      width: 36px; height: 36px;
+      border: 0.5px solid rgba(196,180,154,0.25);
+      background: transparent;
+      color: var(--sombra);
+      font-family: 'Jost', sans-serif;
+      font-size: 10px;
+      font-weight: 400;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: flex;
+      align-items: center;
       justify-content: center;
     }
 
-    .d2-dot {
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
-      background: rgba(196,180,154,0.25);
-      transition: all 0.2s ease;
-      cursor: pointer;
-      border: none;
-      padding: 0;
-      flex-shrink: 0;
-    }
-
-    .d2-dot.active {
+    .d2-preset-btn.active {
       background: var(--golden);
-      width: 16px;
-      border-radius: 3px;
+      border-color: var(--golden);
+      color: var(--terra);
     }
 
-    .d2-counter {
-      font-family: 'Jost', sans-serif;
+    .d2-preset-btn.original { width: 60px; font-size: 8px; letter-spacing: 0.1em; text-transform: uppercase; }
+
+    .d2-preset-counter {
       font-size: 10px;
       letter-spacing: 0.16em;
       text-transform: uppercase;
       color: var(--sombra);
-      font-weight: 400;
-    }
-
-    /* Hint swipe */
-    .d2-swipe-hint {
-      text-align: center;
-      margin-top: 20px;
-      font-family: 'Jost', sans-serif;
-      font-size: 9px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: rgba(138,126,106,0.5);
-      font-weight: 300;
     }
 
     /* ── Dobra Felipe ─────────────────────────────── */
@@ -1003,37 +998,41 @@
     </div>
   </section>
 
-  <!-- Dobra 2 — Antes x Depois -->
+  <!-- Dobra 2 — Slider Antes x Depois -->
   <section class="dobra2">
     <div class="d2-header">
+      <h2 class="d2-headline">9 Presets que vão levar sua fotografia para outro nível</h2>
       <span class="d2-label">Antes x Depois</span>
-      <h2 class="d2-headline">
-        <span class="d2-headline-big">9 Presets</span>
-        <span class="d2-headline-sub">que vão levar sua fotografia para outro nível</span>
-      </h2>
     </div>
 
-    <div class="d2-photo-nav">
-      <button class="d2-photo-arrow" id="d2-photo-prev">&#8249;</button>
-      <span class="d2-photo-label" id="d2-photo-label">Foto 1 de 6</span>
-      <button class="d2-photo-arrow" id="d2-photo-next">&#8250;</button>
-    </div>
-
-    <div class="d2-viewer" id="d2-viewer">
-      <img class="d2-img" id="d2-img" src="presets/Original 1.jpg" alt="Preset">
-      <div class="d2-badge" id="d2-badge">Original</div>
-    </div>
-
-    <div class="d2-nav">
-      <button class="d2-arrow" id="d2-prev">&#8249;</button>
-      <div class="d2-nav-center">
-        <div class="d2-dots" id="d2-dots"></div>
-        <span class="d2-counter" id="d2-counter">Original</span>
+    <div class="d2-thumbs-wrap">
+      <p class="d2-thumbs-title">Passo 1 — Escolha a foto</p>
+      <div class="d2-thumbs" id="d2-thumbs">
+        <div class="d2-thumb-item active" data-photo="1"><img class="d2-thumb-img" src="presets/Original 1.jpg"><span class="d2-thumb-num">1</span></div>
+        <div class="d2-thumb-item" data-photo="2"><img class="d2-thumb-img" src="presets/Original 2.jpg"><span class="d2-thumb-num">2</span></div>
+        <div class="d2-thumb-item" data-photo="3"><img class="d2-thumb-img" src="presets/Original 3.jpg"><span class="d2-thumb-num">3</span></div>
+        <div class="d2-thumb-item" data-photo="4"><img class="d2-thumb-img" src="presets/Original 4.jpg"><span class="d2-thumb-num">4</span></div>
+        <div class="d2-thumb-item" data-photo="5"><img class="d2-thumb-img" src="presets/Original 5.jpg"><span class="d2-thumb-num">5</span></div>
+        <div class="d2-thumb-item" data-photo="6"><img class="d2-thumb-img" src="presets/Original 6.jpg"><span class="d2-thumb-num">6</span></div>
       </div>
-      <button class="d2-arrow" id="d2-next">&#8250;</button>
     </div>
 
-    <p class="d2-swipe-hint">← deslize na foto para explorar os presets →</p>
+    <div class="d2-slider" id="d2-slider">
+      <img class="d2-slider-img" id="d2-img-original" src="presets/Original 1.jpg" alt="Original">
+      <img class="d2-slider-img d2-slider-preset" id="d2-img-preset" src="presets/Original 1 - Preset 1.jpg" alt="Preset">
+      <div class="d2-slider-line" id="d2-slider-line"></div>
+      <div class="d2-slider-handle" id="d2-slider-handle">
+        <svg viewBox="0 0 20 20" width="16" height="16"><path d="M7 4l-4 6 4 6M13 4l4 6-4 6" stroke="#1C1A14" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+      </div>
+      <span class="d2-slider-badge d2-badge-original">Original</span>
+      <span class="d2-slider-badge d2-badge-preset" id="d2-badge-preset">Preset 1</span>
+    </div>
+
+    <div class="d2-preset-nav">
+      <p class="d2-preset-title">Passo 2 — Agora o preset</p>
+      <div class="d2-preset-strip" id="d2-preset-strip"></div>
+      <span class="d2-preset-counter" id="d2-preset-counter">Preset 1 de 9</span>
+    </div>
   </section>
 
   <!-- Dobra 3 — Bônus -->
@@ -1101,106 +1100,93 @@
   </footer>
 
   <script>
+    // ── Slider Antes x Depois ──────────────────────
     (function () {
-      const state = { photo: 1, preset: 0 }; // preset 0 = original
+      const state = { photo: 1, preset: 1, pos: 50 };
 
       function imgSrc(photo, preset) {
         if (preset === 0) return `presets/Original ${photo}.jpg`;
         return `presets/Original ${photo} - Preset ${preset}.jpg`;
       }
 
-      // Renderiza os 10 dots (0=original, 1-9=presets)
-      const dotsEl = document.getElementById('d2-dots');
-      for (let i = 0; i <= 9; i++) {
+      // Monta botões de preset
+      const strip = document.getElementById('d2-preset-strip');
+      const origBtn = document.createElement('button');
+      origBtn.className = 'd2-preset-btn original';
+      origBtn.textContent = 'Original';
+      origBtn.dataset.preset = '0';
+      origBtn.addEventListener('click', () => setPreset(0));
+      strip.appendChild(origBtn);
+      for (let i = 1; i <= 9; i++) {
         const btn = document.createElement('button');
-        btn.className = 'd2-dot' + (i === 0 ? ' active' : '');
-        btn.setAttribute('data-index', i);
-        btn.setAttribute('aria-label', i === 0 ? 'Original' : `Preset ${i}`);
-        btn.addEventListener('click', () => { state.preset = i; update(); });
-        dotsEl.appendChild(btn);
+        btn.className = 'd2-preset-btn' + (i === 1 ? ' active' : '');
+        btn.textContent = i;
+        btn.dataset.preset = i;
+        btn.addEventListener('click', () => setPreset(i));
+        strip.appendChild(btn);
       }
 
-      function update(animate = true) {
-        const img         = document.getElementById('d2-img');
-        const badge       = document.getElementById('d2-badge');
-        const counter     = document.getElementById('d2-counter');
-        const photoLabel  = document.getElementById('d2-photo-label');
-
-        if (animate) {
-          img.classList.add('fading');
-          setTimeout(() => {
-            img.src = imgSrc(state.photo, state.preset);
-            img.classList.remove('fading');
-          }, 180);
-        } else {
-          img.src = imgSrc(state.photo, state.preset);
-        }
-
-        badge.textContent      = state.preset === 0 ? 'Original' : `Preset ${state.preset}`;
-        counter.textContent    = state.preset === 0 ? 'Original' : `Preset ${state.preset} de 9`;
-        photoLabel.textContent = `Foto ${state.photo} de 6`;
-
-        document.querySelectorAll('.d2-dot').forEach((el) => {
-          el.classList.toggle('active', parseInt(el.dataset.index) === state.preset);
+      function setPreset(n) {
+        state.preset = n;
+        const imgPreset = document.getElementById('d2-img-preset');
+        const badge     = document.getElementById('d2-badge-preset');
+        const counter   = document.getElementById('d2-preset-counter');
+        imgPreset.src            = imgSrc(state.photo, n);
+        badge.textContent        = n === 0 ? 'Preset' : `Preset ${n}`;
+        counter.textContent      = n === 0 ? 'Original selecionado' : `Preset ${n} de 9`;
+        imgPreset.style.opacity  = n === 0 ? '0' : '1';
+        badge.style.opacity      = n === 0 ? '0' : '1';
+        document.querySelectorAll('.d2-preset-btn').forEach(b => {
+          b.classList.toggle('active', parseInt(b.dataset.preset) === n);
         });
       }
 
-      // Setas de preset
-      document.getElementById('d2-prev').addEventListener('click', () => {
-        state.preset = state.preset > 0 ? state.preset - 1 : 9;
-        update();
-      });
-      document.getElementById('d2-next').addEventListener('click', () => {
-        state.preset = state.preset < 9 ? state.preset + 1 : 0;
-        update();
-      });
+      function setPhoto(n) {
+        state.photo = n;
+        document.getElementById('d2-img-original').src = imgSrc(n, 0);
+        document.getElementById('d2-img-preset').src   = imgSrc(n, state.preset);
+        document.querySelectorAll('.d2-thumb-item').forEach(t => {
+          t.classList.toggle('active', parseInt(t.dataset.photo) === n);
+        });
+      }
 
-      // Setas de foto
-      document.getElementById('d2-photo-prev').addEventListener('click', () => {
-        state.photo = state.photo > 1 ? state.photo - 1 : 6;
-        update();
-      });
-      document.getElementById('d2-photo-next').addEventListener('click', () => {
-        state.photo = state.photo < 6 ? state.photo + 1 : 1;
-        update();
-      });
+      function setPos(pct) {
+        pct = Math.max(2, Math.min(98, pct));
+        state.pos = pct;
+        document.getElementById('d2-img-preset').style.clipPath  = `inset(0 0 0 ${pct}%)`;
+        document.getElementById('d2-slider-line').style.left     = `${pct}%`;
+        document.getElementById('d2-slider-handle').style.left   = `${pct}%`;
+      }
 
-      // Swipe no viewer — horizontal: preset / vertical: foto
-      const viewer = document.getElementById('d2-viewer');
-      let touchStartX = 0, touchStartY = 0;
+      setPos(50);
 
-      viewer.addEventListener('touchstart', (e) => {
-        touchStartX = e.touches[0].clientX;
-        touchStartY = e.touches[0].clientY;
+      const slider = document.getElementById('d2-slider');
+      function getPct(clientX) {
+        const rect = slider.getBoundingClientRect();
+        return ((clientX - rect.left) / rect.width) * 100;
+      }
+
+      let dragging = false;
+      slider.addEventListener('mousedown', () => { dragging = true; });
+      window.addEventListener('mousemove', e => { if (dragging) setPos(getPct(e.clientX)); });
+      window.addEventListener('mouseup', () => { dragging = false; });
+
+      slider.addEventListener('touchstart', e => {
+        dragging = true;
+        setPos(getPct(e.touches[0].clientX));
       }, { passive: true });
-
-      viewer.addEventListener('touchend', (e) => {
-        const dx = e.changedTouches[0].clientX - touchStartX;
-        const dy = e.changedTouches[0].clientY - touchStartY;
-        if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
-          // Swipe horizontal → preset
-          state.preset = dx < 0
-            ? (state.preset < 9 ? state.preset + 1 : 0)
-            : (state.preset > 0 ? state.preset - 1 : 9);
-          update();
-        } else if (Math.abs(dy) > Math.abs(dx) && Math.abs(dy) > 40) {
-          // Swipe vertical → foto
-          state.photo = dy < 0
-            ? (state.photo < 6 ? state.photo + 1 : 1)
-            : (state.photo > 1 ? state.photo - 1 : 6);
-          update();
-        }
+      slider.addEventListener('touchmove', e => {
+        if (dragging) setPos(getPct(e.touches[0].clientX));
       }, { passive: true });
+      slider.addEventListener('touchend', () => { dragging = false; });
 
-      // Teclado
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowRight') { state.preset = state.preset < 9 ? state.preset + 1 : 0; update(); }
-        if (e.key === 'ArrowLeft')  { state.preset = state.preset > 0 ? state.preset - 1 : 9; update(); }
-        if (e.key === 'ArrowUp')    { state.photo = state.photo > 1 ? state.photo - 1 : 6; update(); }
-        if (e.key === 'ArrowDown')  { state.photo = state.photo < 6 ? state.photo + 1 : 1; update(); }
+      document.getElementById('d2-thumbs').addEventListener('click', e => {
+        const item = e.target.closest('.d2-thumb-item');
+        if (!item) return;
+        setPhoto(parseInt(item.dataset.photo));
       });
 
-      update(false);
+      setPreset(1);
     })();
 
     // ── Modal de lead ──────────────────────────────
