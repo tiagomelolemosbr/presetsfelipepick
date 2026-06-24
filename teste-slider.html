@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teste Slider — Presets</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@400&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --terra:      #1C1A14;
+      --pelicula:   #F2EAD8;
+      --golden:     #C4A96A;
+      --sombra:     #8A7E6A;
+      --luz-difusa: #C4B49A;
+    }
+
+    body {
+      background: #100F0C;
+      color: var(--pelicula);
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+
+    /* ── Header ──────────────────────────────────── */
+    .header {
+      text-align: center;
+      padding: 48px 28px 32px;
+    }
+
+    .label {
+      display: block;
+      font-size: 11px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--golden);
+      font-weight: 400;
+      margin-top: 16px;
+      margin-bottom: 20px;
+    }
+
+    .headline {
+      font-family: 'Bodoni Moda', serif;
+      font-weight: 400;
+      font-size: clamp(22px, 5.8vw, 36px);
+      line-height: 1.2;
+      color: var(--pelicula);
+    }
+
+    /* ── Miniaturas de foto ──────────────────────── */
+    .photo-thumbs-wrap {
+      padding: 0 16px 20px;
+    }
+
+    .photo-thumbs-title {
+      font-family: 'Jost', sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--sombra);
+      font-weight: 400;
+      text-align: left;
+      margin-bottom: 12px;
+    }
+
+    .photo-thumbs {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .photo-thumb-item {
+      position: relative;
+      cursor: pointer;
+      opacity: 0.45;
+      transition: opacity 0.2s ease;
+    }
+
+    .photo-thumb-item.active {
+      opacity: 1;
+      outline: 1.5px solid var(--golden);
+      outline-offset: -1.5px;
+    }
+
+    .photo-thumb {
+      width: 100%;
+      height: 72px;
+      object-fit: cover;
+      display: block;
+      pointer-events: none;
+    }
+
+    .photo-num {
+      position: absolute;
+      top: 6px;
+      left: 8px;
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      color: var(--pelicula);
+      background: rgba(28,26,20,0.65);
+      padding: 2px 6px;
+      backdrop-filter: blur(4px);
+      pointer-events: none;
+    }
+
+    /* ── Slider ──────────────────────────────────── */
+    .slider-wrap {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 3/2;
+      overflow: hidden;
+      background: #0a0908;
+      user-select: none;
+      touch-action: none;
+    }
+
+    .slider-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      pointer-events: none;
+    }
+
+    /* Imagem do preset — clipeada pelo lado direito */
+    .slider-preset {
+      clip-path: inset(0 0 0 50%);
+      transition: clip-path 0s;
+    }
+
+    /* Linha divisória */
+    .slider-line {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 2px;
+      background: rgba(242,234,216,0.9);
+      transform: translateX(-50%);
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    /* Handle circular */
+    .slider-handle {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--pelicula);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 11;
+      pointer-events: none;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.4);
+    }
+
+    .slider-handle svg {
+      width: 16px;
+      height: 16px;
+      fill: var(--terra);
+    }
+
+    /* Labels dentro do slider */
+    .slider-badge {
+      position: absolute;
+      bottom: 14px;
+      font-size: 9px;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      background: rgba(28,26,20,0.7);
+      color: var(--pelicula);
+      padding: 4px 9px;
+      backdrop-filter: blur(4px);
+      border: 0.5px solid rgba(196,180,154,0.25);
+      z-index: 5;
+      pointer-events: none;
+    }
+
+    .badge-original { left: 12px; }
+    .badge-preset   { right: 12px; }
+
+    /* ── Seletor de presets ───────────────────────── */
+    .preset-nav {
+      padding: 20px 16px 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .preset-strip {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .preset-btn {
+      flex-shrink: 0;
+      width: 36px;
+      height: 36px;
+      border-radius: 0;
+      border: 0.5px solid rgba(196,180,154,0.25);
+      background: transparent;
+      color: var(--sombra);
+      font-family: 'Jost', sans-serif;
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .preset-btn.active {
+      background: var(--golden);
+      border-color: var(--golden);
+      color: var(--terra);
+    }
+
+    .preset-btn.original {
+      width: 60px;
+      font-size: 8px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .preset-title {
+      font-family: 'Jost', sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--sombra);
+      font-weight: 400;
+      text-align: left;
+      width: 100%;
+      margin-bottom: 12px;
+    }
+
+    .preset-counter {
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--sombra);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <h2 class="headline">9 Presets que vão levar sua fotografia para outro nível</h2>
+    <span class="label">Antes x Depois</span>
+  </div>
+
+  <div class="photo-thumbs-wrap">
+    <p class="photo-thumbs-title">Passo 1 — Escolha a foto</p>
+    <div class="photo-thumbs" id="photo-thumbs">
+      <div class="photo-thumb-item active" data-photo="1">
+        <img class="photo-thumb" src="presets/Original 1.jpg" data-photo="1">
+        <span class="photo-num">1</span>
+      </div>
+      <div class="photo-thumb-item" data-photo="2">
+        <img class="photo-thumb" src="presets/Original 2.jpg" data-photo="2">
+        <span class="photo-num">2</span>
+      </div>
+      <div class="photo-thumb-item" data-photo="3">
+        <img class="photo-thumb" src="presets/Original 3.jpg" data-photo="3">
+        <span class="photo-num">3</span>
+      </div>
+      <div class="photo-thumb-item" data-photo="4">
+        <img class="photo-thumb" src="presets/Original 4.jpg" data-photo="4">
+        <span class="photo-num">4</span>
+      </div>
+      <div class="photo-thumb-item" data-photo="5">
+        <img class="photo-thumb" src="presets/Original 5.jpg" data-photo="5">
+        <span class="photo-num">5</span>
+      </div>
+      <div class="photo-thumb-item" data-photo="6">
+        <img class="photo-thumb" src="presets/Original 6.jpg" data-photo="6">
+        <span class="photo-num">6</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="slider-wrap" id="slider">
+    <img class="slider-img" id="img-original" src="presets/Original 1.jpg" alt="Original">
+    <img class="slider-img slider-preset" id="img-preset" src="presets/Original 1 - Preset 1.jpg" alt="Preset">
+    <div class="slider-line" id="slider-line"></div>
+    <div class="slider-handle" id="slider-handle">
+      <svg viewBox="0 0 20 20"><path d="M7 4l-4 6 4 6M13 4l4 6-4 6" stroke="#1C1A14" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+    </div>
+    <span class="slider-badge badge-original">Original</span>
+    <span class="slider-badge badge-preset" id="badge-preset">Preset 1</span>
+  </div>
+
+  <div class="preset-nav">
+    <p class="preset-title">Passo 2 — Agora o preset</p>
+    <div class="preset-strip" id="preset-strip"></div>
+    <span class="preset-counter" id="preset-counter">Preset 1 de 9</span>
+  </div>
+
+  <script>
+    const state = { photo: 1, preset: 1, pos: 50 };
+
+    function imgSrc(photo, preset) {
+      if (preset === 0) return `presets/Original ${photo}.jpg`;
+      return `presets/Original ${photo} - Preset ${preset}.jpg`;
+    }
+
+    // Monta botões de preset
+    const strip = document.getElementById('preset-strip');
+    const origBtn = document.createElement('button');
+    origBtn.className = 'preset-btn original';
+    origBtn.textContent = 'Original';
+    origBtn.dataset.preset = '0';
+    origBtn.addEventListener('click', () => setPreset(0));
+    strip.appendChild(origBtn);
+
+    for (let i = 1; i <= 9; i++) {
+      const btn = document.createElement('button');
+      btn.className = 'preset-btn' + (i === 1 ? ' active' : '');
+      btn.textContent = i;
+      btn.dataset.preset = i;
+      btn.addEventListener('click', () => setPreset(i));
+      strip.appendChild(btn);
+    }
+
+    function setPreset(n) {
+      state.preset = n;
+      const imgPreset = document.getElementById('img-preset');
+      const badge     = document.getElementById('badge-preset');
+      const counter   = document.getElementById('preset-counter');
+
+      imgPreset.src    = imgSrc(state.photo, n);
+      badge.textContent    = n === 0 ? 'Preset' : `Preset ${n}`;
+      counter.textContent  = n === 0 ? 'Original selecionado' : `Preset ${n} de 9`;
+
+      document.querySelectorAll('.preset-btn').forEach(b => {
+        b.classList.toggle('active', parseInt(b.dataset.preset) === n);
+      });
+
+      // Se preset = original, mostra só a imagem original
+      document.getElementById('img-preset').style.opacity = n === 0 ? '0' : '1';
+      badge.style.opacity = n === 0 ? '0' : '1';
+    }
+
+    function setPhoto(n) {
+      state.photo = n;
+      document.getElementById('img-original').src = imgSrc(n, 0);
+      document.getElementById('img-preset').src   = imgSrc(n, state.preset);
+      document.getElementById('photo-label').textContent = `Foto ${n} de 6`;
+    }
+
+    // Posição do slider
+    function setPos(pct) {
+      pct = Math.max(2, Math.min(98, pct));
+      state.pos = pct;
+      document.getElementById('img-preset').style.clipPath   = `inset(0 0 0 ${pct}%)`;
+      document.getElementById('slider-line').style.left      = `${pct}%`;
+      document.getElementById('slider-handle').style.left    = `${pct}%`;
+    }
+
+    setPos(50);
+
+    // Drag mouse
+    const slider = document.getElementById('slider');
+
+    function getPct(clientX) {
+      const rect = slider.getBoundingClientRect();
+      return ((clientX - rect.left) / rect.width) * 100;
+    }
+
+    let dragging = false;
+    slider.addEventListener('mousedown', () => { dragging = true; });
+    window.addEventListener('mousemove', e => { if (dragging) setPos(getPct(e.clientX)); });
+    window.addEventListener('mouseup', () => { dragging = false; });
+
+    // Touch
+    slider.addEventListener('touchstart', e => {
+      dragging = true;
+      setPos(getPct(e.touches[0].clientX));
+    }, { passive: true });
+
+    slider.addEventListener('touchmove', e => {
+      if (dragging) setPos(getPct(e.touches[0].clientX));
+    }, { passive: true });
+
+    slider.addEventListener('touchend', () => { dragging = false; });
+
+    // Miniaturas de foto
+    document.getElementById('photo-thumbs').addEventListener('click', e => {
+      const item = e.target.closest('.photo-thumb-item');
+      if (!item) return;
+      document.querySelectorAll('.photo-thumb-item').forEach(t => t.classList.remove('active'));
+      item.classList.add('active');
+      setPhoto(parseInt(item.dataset.photo));
+    });
+
+    // Init
+    setPreset(1);
+  </script>
+
+</body>
+</html>
