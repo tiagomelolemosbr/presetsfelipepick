@@ -7,7 +7,8 @@
   <link rel="icon" id="favicon">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,500;1,400&family=Cormorant+Garamond:ital,wght@0,300;1,300&family=IM+Fell+English:ital@0;1&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;1,400&family=Cormorant+Garamond:ital,wght@1,300&family=IM+Fell+English:ital@1&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="hero.jpg">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -448,8 +449,12 @@
     .dobra4-bg {
       position: absolute;
       inset: 0;
-      background: url('comentarios-bg.jpg') center / cover no-repeat;
+      background: var(--terra) center / cover no-repeat;
       z-index: 0;
+    }
+
+    .dobra4-bg.bg-loaded {
+      background-image: url('comentarios-bg.jpg');
     }
 
     .dobra4-bg::after {
@@ -511,7 +516,11 @@
       text-align: center;
       border-top: 0.5px solid rgba(196,180,154,0.15);
       overflow: hidden;
-      background: url('oferta-bg.jpg') center / cover no-repeat;
+      background: var(--terra) center / cover no-repeat;
+    }
+
+    .dobra5.bg-loaded {
+      background-image: url('oferta-bg.jpg');
     }
 
     .dobra5::before {
@@ -852,7 +861,11 @@
       text-align: center;
       border-top: 0.5px solid rgba(196,180,154,0.15);
       overflow: hidden;
-      background: url('bonus-bg.jpg') center / cover no-repeat;
+      background: var(--terra) center / cover no-repeat;
+    }
+
+    .dobra3.bg-loaded {
+      background-image: url('bonus-bg.jpg');
     }
 
     .dobra3::before {
@@ -1306,6 +1319,18 @@
       const raw = telInput.value.replace(/\D/g,'');
       telInput.value = countrySelect.value + raw;
     }, { capture: true });
+
+    // ── Lazy load de backgrounds ───────────────────
+    const bgObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('bg-loaded');
+          bgObserver.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: '200px' });
+
+    document.querySelectorAll('.dobra3, .dobra4-bg, .dobra5').forEach(el => bgObserver.observe(el));
 
     // Animação de scroll nos comentários
     const observer = new IntersectionObserver((entries) => {
