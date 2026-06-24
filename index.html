@@ -1,0 +1,1314 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Presets de Cinema by Felipe Pick</title>
+  <link rel="icon" id="favicon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,500;1,400&family=Cormorant+Garamond:ital,wght@0,300;1,300&family=IM+Fell+English:ital@0;1&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --pelicula:   #F2EAD8;
+      --terra:      #1C1A14;
+      --folhagem:   #7A8C6E;
+      --golden:     #C4A96A;
+      --sombra:     #8A7E6A;
+      --noite:      #3D2E1A;
+      --raiz:       #6B5E48;
+      --luz-difusa: #C4B49A;
+      --bar-h:      42px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--terra);
+      color: var(--pelicula);
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Barra de cupom ────────────────────────────── */
+    .cupom-bar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      height: var(--bar-h);
+      background: var(--terra);
+      border-bottom: 0.5px solid rgba(196,180,154,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 20px;
+      text-align: center;
+    }
+
+    .cupom-bar p {
+      font-family: 'Jost', sans-serif;
+      font-size: 11px;
+      font-weight: 300;
+      color: var(--luz-difusa);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .cupom-bar strong {
+      font-weight: 400;
+      color: var(--golden);
+      letter-spacing: 0.18em;
+    }
+
+    /* ── Hero ──────────────────────────────────────── */
+    .hero {
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      text-align: center;
+      padding: var(--bar-h) 28px 56px;
+      position: relative;
+      overflow: hidden;
+      background: url('hero.jpg') center / cover no-repeat;
+    }
+
+    /* Máscara base — escurece tudo */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to bottom,
+          rgba(28,26,20,0.50) 0%,
+          rgba(28,26,20,0.30) 30%,
+          rgba(28,26,20,0.35) 55%,
+          rgba(28,26,20,0.88) 100%);
+      pointer-events: none;
+    }
+
+    /* Vinheta nas bordas */
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, transparent 35%, rgba(28,26,20,0.55) 100%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .hero-label {
+      font-family: 'Jost', sans-serif;
+      font-size: 9px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(242,234,216,0.65);
+      font-weight: 400;
+    }
+
+    .hero-headline {
+      font-family: 'Bodoni Moda', serif;
+      font-weight: 400;
+      font-size: clamp(34px, 8.5vw, 64px);
+      line-height: 1.08;
+      letter-spacing: 0.02em;
+      color: var(--pelicula);
+    }
+
+    .hero-sub {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(17px, 4vw, 22px);
+      font-weight: 300;
+      color: rgba(242,234,216,0.75);
+      letter-spacing: 0.01em;
+      line-height: 1.45;
+    }
+
+    .hero-btn {
+      display: inline-block;
+      margin-top: 8px;
+      font-family: 'Jost', sans-serif;
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      background: var(--golden);
+      color: var(--terra);
+      padding: 16px 36px;
+      text-decoration: none;
+      transition: opacity 0.2s ease;
+    }
+
+    .hero-btn:active { opacity: 0.85; }
+
+    /* ── Dobra 2 — Antes x Depois ─────────────────── */
+    .dobra2 {
+      background: #100F0C;
+      padding: 72px 0 80px;
+    }
+
+    .d2-header {
+      text-align: center;
+      padding: 0 28px;
+      margin-bottom: 40px;
+    }
+
+    .d2-label {
+      display: block;
+      font-family: 'Jost', sans-serif;
+      font-size: 9px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--golden);
+      font-weight: 400;
+      margin-bottom: 14px;
+    }
+
+    .d2-headline {
+      font-family: 'Bodoni Moda', serif;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      color: var(--pelicula);
+    }
+
+    .d2-headline-big {
+      display: block;
+      font-size: clamp(52px, 13vw, 96px);
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+
+    .d2-headline-sub {
+      display: block;
+      font-size: clamp(15px, 3.8vw, 24px);
+      font-style: italic;
+      font-weight: 400;
+      line-height: 1.3;
+      color: rgba(242,234,216,0.65);
+    }
+
+    /* Navegação de foto */
+    .d2-photo-nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 20px;
+      padding: 0 28px;
+    }
+
+    .d2-photo-arrow {
+      background: transparent;
+      border: none;
+      color: rgba(196,180,154,0.45);
+      font-size: 20px;
+      cursor: pointer;
+      padding: 4px 8px;
+      transition: color 0.2s ease;
+      line-height: 1;
+    }
+
+    .d2-photo-arrow:active { color: var(--golden); }
+
+    .d2-photo-label {
+      font-family: 'Jost', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--sombra);
+      font-weight: 400;
+      min-width: 80px;
+      text-align: center;
+    }
+
+    /* Viewer */
+    .d2-viewer {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 3/2;
+      overflow: hidden;
+      background: #0a0908;
+      cursor: grab;
+    }
+
+    .d2-viewer:active { cursor: grabbing; }
+
+    .d2-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: opacity 0.18s ease;
+    }
+
+    .d2-img.fading { opacity: 0; }
+
+    /* Badge de estado */
+    .d2-badge {
+      position: absolute;
+      bottom: 16px;
+      left: 16px;
+      font-family: 'Jost', sans-serif;
+      font-size: 9px;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      background: rgba(28,26,20,0.72);
+      color: var(--pelicula);
+      padding: 5px 10px;
+      border: 0.5px solid rgba(196,180,154,0.3);
+      backdrop-filter: blur(4px);
+    }
+
+    /* Navegação */
+    .d2-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 20px 0;
+      gap: 12px;
+    }
+
+    .d2-arrow {
+      background: transparent;
+      border: 0.5px solid rgba(196,180,154,0.3);
+      color: var(--luz-difusa);
+      width: 40px;
+      height: 40px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      line-height: 1;
+      padding-bottom: 2px;
+    }
+
+    .d2-arrow:active {
+      background: rgba(196,180,154,0.12);
+    }
+
+    .d2-nav-center {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* Dots de progresso */
+    .d2-dots {
+      display: flex;
+      gap: 5px;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .d2-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: rgba(196,180,154,0.25);
+      transition: all 0.2s ease;
+      cursor: pointer;
+      border: none;
+      padding: 0;
+      flex-shrink: 0;
+    }
+
+    .d2-dot.active {
+      background: var(--golden);
+      width: 16px;
+      border-radius: 3px;
+    }
+
+    .d2-counter {
+      font-family: 'Jost', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--sombra);
+      font-weight: 400;
+    }
+
+    /* Hint swipe */
+    .d2-swipe-hint {
+      text-align: center;
+      margin-top: 20px;
+      font-family: 'Jost', sans-serif;
+      font-size: 9px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(138,126,106,0.5);
+      font-weight: 300;
+    }
+
+    /* ── Dobra Felipe ─────────────────────────────── */
+    .dobra-felipe {
+      background: var(--terra);
+      border-top: 0.5px solid rgba(196,180,154,0.15);
+    }
+
+    .felipe-foto {
+      width: 100%;
+      aspect-ratio: 4/5;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+
+    .felipe-texto {
+      padding: 40px 28px 64px;
+    }
+
+    .felipe-label {
+      display: block;
+      font-family: 'Jost', sans-serif;
+      font-size: 9px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--sombra);
+      font-weight: 400;
+      margin-bottom: 12px;
+    }
+
+    .felipe-nome {
+      font-family: 'Bodoni Moda', serif;
+      font-weight: 400;
+      font-size: clamp(22px, 6vw, 36px);
+      letter-spacing: 0.04em;
+      color: var(--pelicula);
+      margin-bottom: 28px;
+      line-height: 1.1;
+    }
+
+    .felipe-bio {
+      font-family: 'Jost', sans-serif;
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.85;
+      color: rgba(242,234,216,0.6);
+    }
+
+    .felipe-bio p + p { margin-top: 16px; }
+
+    /* ── Garantia ──────────────────────────────────── */
+    .garantia {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 28px;
+      padding-top: 28px;
+      border-top: 0.5px solid rgba(196,180,154,0.2);
+    }
+
+    .garantia-item {
+      font-family: 'Jost', sans-serif;
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--sombra);
+      text-align: center;
+    }
+
+    .garantia-sep {
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: rgba(196,180,154,0.3);
+      flex-shrink: 0;
+    }
+
+    /* ── Dobra 4 — Comentários ────────────────────── */
+    .dobra4 {
+      position: relative;
+      padding: 80px 24px 80px;
+      overflow: hidden;
+      border-top: 0.5px solid rgba(196,180,154,0.15);
+    }
+
+    .dobra4-bg {
+      position: absolute;
+      inset: 0;
+      background: url('comentarios-bg.jpg') center / cover no-repeat;
+      z-index: 0;
+    }
+
+    .dobra4-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(12,11,10,0.88);
+    }
+
+    .d4-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .d4-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .d4-headline {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(32px, 8vw, 58px);
+      line-height: 1.1;
+      color: var(--pelicula);
+    }
+
+    /* Coluna única, animada no scroll */
+    .d4-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .d4-item {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+
+    .d4-item.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .d4-item img {
+      width: 100%;
+      display: block;
+      border-radius: 2px;
+    }
+
+    /* ── Dobra 5 — Oferta ─────────────────────────── */
+    .dobra5 {
+      position: relative;
+      padding: 80px 28px;
+      text-align: center;
+      border-top: 0.5px solid rgba(196,180,154,0.15);
+      overflow: hidden;
+      background: url('oferta-bg.jpg') center / cover no-repeat;
+    }
+
+    .dobra5::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(12,11,10,0.84);
+      pointer-events: none;
+    }
+
+    .dobra5 > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .d5-label {
+      display: block;
+      font-family: 'Jost', sans-serif;
+      font-size: 9px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--sombra);
+      font-weight: 400;
+      margin-bottom: 28px;
+    }
+
+    .d5-product {
+      font-family: 'IM Fell English', serif;
+      font-weight: 400;
+      font-size: clamp(26px, 7vw, 48px);
+      line-height: 1.1;
+      color: var(--pelicula);
+      margin-bottom: 12px;
+    }
+
+    .d5-bonus {
+      font-family: 'IM Fell English', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(17px, 4.5vw, 24px);
+      color: var(--golden);
+      margin-bottom: 36px;
+      line-height: 1.3;
+    }
+
+    .d5-rule {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 0 auto 36px;
+      max-width: 200px;
+    }
+
+    .d5-rule::before,
+    .d5-rule::after {
+      content: '';
+      flex: 1;
+      height: 0.5px;
+      background: rgba(196,180,154,0.25);
+    }
+
+    .d5-rule-dot {
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: var(--golden);
+      flex-shrink: 0;
+    }
+
+    .d5-price-parcel {
+      font-family: 'Jost', sans-serif;
+      font-size: 13px;
+      font-weight: 300;
+      letter-spacing: 0.06em;
+      color: var(--sombra);
+      margin-bottom: 6px;
+    }
+
+    .d5-price-parcel strong {
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--pelicula);
+    }
+
+    .d5-price-avista {
+      font-family: 'Jost', sans-serif;
+      font-size: 11px;
+      font-weight: 300;
+      letter-spacing: 0.1em;
+      color: var(--sombra);
+      margin-bottom: 36px;
+      text-transform: uppercase;
+    }
+
+    .d5-btn {
+      display: block;
+      width: 100%;
+      max-width: 360px;
+      margin: 0 auto;
+      font-family: 'Jost', sans-serif;
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      background: var(--golden);
+      color: var(--terra);
+      border: none;
+      padding: 18px 28px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: opacity 0.2s ease;
+    }
+
+    .d5-btn:active { opacity: 0.85; }
+
+    /* ── Rodapé — Dúvidas ─────────────────────────── */
+    .rodape {
+      background: #0a0908;
+      padding: 48px 28px;
+      text-align: center;
+      border-top: 0.5px solid rgba(196,180,154,0.12);
+    }
+
+    .rodape p {
+      font-family: 'Jost', sans-serif;
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--sombra);
+      letter-spacing: 0.03em;
+      line-height: 1.7;
+    }
+
+    .rodape a {
+      color: var(--golden);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-thickness: 0.5px;
+      font-weight: 400;
+      transition: opacity 0.2s ease;
+    }
+
+    .rodape a:active { opacity: 0.7; }
+
+    /* ── Botão flutuante WhatsApp ──────────────────── */
+    .whats-float {
+      position: fixed;
+      bottom: 24px;
+      right: 20px;
+      z-index: 300;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--terra);
+      border: 0.5px solid rgba(196,180,154,0.3);
+      padding: 11px 16px 11px 13px;
+      text-decoration: none;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+      transition: opacity 0.2s ease;
+    }
+
+    .whats-float:active { opacity: 0.8; }
+
+    .whats-float svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      fill: #4CAF72;
+    }
+
+    .whats-float span {
+      font-family: 'Jost', sans-serif;
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--luz-difusa);
+      white-space: nowrap;
+    }
+
+    /* ── Modal de lead ────────────────────────────── */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 500;
+      background: rgba(12,11,10,0.88);
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .modal-overlay.open { display: flex; }
+
+    .modal-box {
+      background: var(--terra);
+      border: 0.5px solid rgba(196,180,154,0.2);
+      width: 100%;
+      max-width: 400px;
+      padding: 40px 28px 36px;
+      position: relative;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 14px;
+      right: 16px;
+      background: none;
+      border: none;
+      color: var(--sombra);
+      font-size: 22px;
+      cursor: pointer;
+      line-height: 1;
+      padding: 4px;
+    }
+
+    .modal-label {
+      display: block;
+      font-family: 'Jost', sans-serif;
+      font-size: 9px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--golden);
+      font-weight: 400;
+      margin-bottom: 12px;
+    }
+
+    .modal-title {
+      font-family: 'Bodoni Moda', serif;
+      font-weight: 400;
+      font-size: clamp(22px, 6vw, 30px);
+      line-height: 1.1;
+      color: var(--pelicula);
+      margin-bottom: 28px;
+    }
+
+    .modal-form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .modal-form input {
+      background: rgba(242,234,216,0.05);
+      border: 0.5px solid rgba(196,180,154,0.25);
+      color: var(--pelicula);
+      font-family: 'Jost', sans-serif;
+      font-size: 13px;
+      font-weight: 300;
+      padding: 14px 16px;
+      outline: none;
+      width: 100%;
+      transition: border-color 0.2s ease;
+      -webkit-appearance: none;
+      border-radius: 0;
+    }
+
+    .modal-form input::placeholder {
+      color: var(--sombra);
+      letter-spacing: 0.04em;
+    }
+
+    .modal-form input:focus {
+      border-color: rgba(196,180,154,0.6);
+    }
+
+    .modal-submit {
+      margin-top: 4px;
+      font-family: 'Jost', sans-serif;
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      background: var(--golden);
+      color: var(--terra);
+      border: none;
+      padding: 17px 28px;
+      cursor: pointer;
+      width: 100%;
+      transition: opacity 0.2s ease;
+    }
+
+    .modal-submit:disabled { opacity: 0.6; cursor: default; }
+
+    .modal-msg {
+      margin-top: 14px;
+      font-family: 'Jost', sans-serif;
+      font-size: 11px;
+      font-weight: 300;
+      letter-spacing: 0.06em;
+      color: var(--sombra);
+      text-align: center;
+    }
+
+    /* Campo de telefone com seletor de país */
+    .phone-row {
+      display: flex;
+      gap: 0;
+    }
+
+    .country-select {
+      background: rgba(242,234,216,0.05);
+      border: 0.5px solid rgba(196,180,154,0.25);
+      border-right: none;
+      color: var(--pelicula);
+      font-family: 'Jost', sans-serif;
+      font-size: 13px;
+      font-weight: 300;
+      padding: 14px 10px;
+      outline: none;
+      cursor: pointer;
+      flex-shrink: 0;
+      width: 100px;
+      -webkit-appearance: none;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%238A7E6A'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 8px center;
+      padding-right: 22px;
+      border-radius: 0;
+    }
+
+    .country-select:focus { border-color: rgba(196,180,154,0.6); }
+
+    .country-select option {
+      background: #1C1A14;
+      color: #F2EAD8;
+    }
+
+    .phone-row input {
+      flex: 1;
+      border-left: none !important;
+    }
+
+    /* ── Dobra 3 — Bônus ───────────────────────────── */
+    .dobra3 {
+      position: relative;
+      padding: 80px 28px;
+      text-align: center;
+      border-top: 0.5px solid rgba(196,180,154,0.15);
+      overflow: hidden;
+      background: url('bonus-bg.jpg') center / cover no-repeat;
+    }
+
+    .dobra3::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(12,11,10,0.85);
+      pointer-events: none;
+    }
+
+    .dobra3 > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .d3-tag {
+      display: inline-block;
+      font-family: 'Jost', sans-serif;
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--terra);
+      background: var(--golden);
+      padding: 5px 14px;
+      font-weight: 400;
+      margin-bottom: 36px;
+    }
+
+    .d3-rule {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 0 auto 32px;
+      max-width: 280px;
+    }
+
+    .d3-rule::before,
+    .d3-rule::after {
+      content: '';
+      flex: 1;
+      height: 0.5px;
+      background: rgba(196,180,154,0.3);
+    }
+
+    .d3-rule-dot {
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: var(--golden);
+      flex-shrink: 0;
+    }
+
+    .d3-headline {
+      font-family: 'Bodoni Moda', serif;
+      font-weight: 400;
+      font-size: clamp(32px, 8vw, 60px);
+      line-height: 1.08;
+      letter-spacing: 0.02em;
+      color: var(--pelicula);
+      margin-bottom: 20px;
+    }
+
+    .d3-body {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(17px, 4vw, 22px);
+      font-weight: 300;
+      color: rgba(242,234,216,0.6);
+      line-height: 1.55;
+      max-width: 340px;
+      margin: 0 auto;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Botão flutuante WhatsApp -->
+  <a class="whats-float" href="https://wa.me/5561996179972?text=Oii%2C%20Tiago%21%20Tenho%20uma%20d%C3%BAvida%20sobre%20os%20presets%20%3A%29" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+    <span>Dúvidas?</span>
+  </a>
+
+  <!-- Modal de lead -->
+  <div class="modal-overlay" id="modal">
+    <div class="modal-box">
+      <button class="modal-close" id="modal-close">&#215;</button>
+      <span class="modal-label">Quase lá</span>
+      <h3 class="modal-title">Antes de ir<br>para o pagamento</h3>
+      <form class="modal-form" id="lead-form">
+        <input type="text"  name="nome"     placeholder="Seu nome"       required autocomplete="name">
+        <input type="email" name="email"    placeholder="Seu e-mail"     required autocomplete="email">
+        <div class="phone-row">
+          <select class="country-select" id="country-code">
+            <option value="+55"  data-mask="br"      selected>🇧🇷 +55</option>
+            <option value="+351" data-mask="pt"             >🇵🇹 +351</option>
+            <option value="+1"   data-mask="us"             >🇺🇸 +1</option>
+            <option value="+54"  data-mask="generic"        >🇦🇷 +54</option>
+            <option value="+57"  data-mask="generic"        >🇨🇴 +57</option>
+            <option value="+34"  data-mask="generic"        >🇪🇸 +34</option>
+            <option value="+44"  data-mask="generic"        >🇬🇧 +44</option>
+            <option value="+49"  data-mask="generic"        >🇩🇪 +49</option>
+          </select>
+          <input type="tel" id="telefone-input" name="telefone" placeholder="(00) 00000-0000" required autocomplete="tel">
+        </div>
+        <button type="submit" class="modal-submit" id="modal-submit">Ir para o pagamento</button>
+        <p class="modal-msg" id="modal-msg"></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- Barra de cupom fixa -->
+  <div class="cupom-bar">
+    <p>Use o cupom <strong>LANÇAMENTO</strong> e ganhe 20% OFF</p>
+  </div>
+
+  <!-- Dobra 1 — Hero -->
+  <section class="hero">
+    <div class="hero-content">
+      <span class="hero-label">9 Presets · Lightroom</span>
+      <h1 class="hero-headline">Presets de Cinema<br>by Felipe Pick</h1>
+      <p class="hero-sub">Transforme suas fotos em cenas de filme</p>
+      <a href="#oferta" class="hero-btn" id="hero-cta">Comprar os presets</a>
+    </div>
+  </section>
+
+  <!-- Dobra 2 — Antes x Depois -->
+  <section class="dobra2">
+    <div class="d2-header">
+      <span class="d2-label">Antes x Depois</span>
+      <h2 class="d2-headline">
+        <span class="d2-headline-big">9 Presets</span>
+        <span class="d2-headline-sub">que vão levar sua fotografia para outro nível</span>
+      </h2>
+    </div>
+
+    <div class="d2-photo-nav">
+      <button class="d2-photo-arrow" id="d2-photo-prev">&#8249;</button>
+      <span class="d2-photo-label" id="d2-photo-label">Foto 1 de 6</span>
+      <button class="d2-photo-arrow" id="d2-photo-next">&#8250;</button>
+    </div>
+
+    <div class="d2-viewer" id="d2-viewer">
+      <img class="d2-img" id="d2-img" src="presets/Original 1.jpg" alt="Preset">
+      <div class="d2-badge" id="d2-badge">Original</div>
+    </div>
+
+    <div class="d2-nav">
+      <button class="d2-arrow" id="d2-prev">&#8249;</button>
+      <div class="d2-nav-center">
+        <div class="d2-dots" id="d2-dots"></div>
+        <span class="d2-counter" id="d2-counter">Original</span>
+      </div>
+      <button class="d2-arrow" id="d2-next">&#8250;</button>
+    </div>
+
+    <p class="d2-swipe-hint">← deslize na foto para explorar os presets →</p>
+  </section>
+
+  <!-- Dobra 3 — Bônus -->
+  <section class="dobra3">
+    <span class="d3-tag">Bônus incluído</span>
+    <div class="d3-rule"><div class="d3-rule-dot"></div></div>
+    <h2 class="d3-headline">Workshop de Edição</h2>
+    <p class="d3-body">Aprenda a dominar o Lightroom e tire todas as suas dúvidas sobre edição comigo.</p>
+  </section>
+
+  <!-- Dobra 4 — Comentários -->
+  <section class="dobra4">
+    <div class="dobra4-bg"></div>
+    <div class="d4-inner">
+      <div class="d4-header">
+        <h2 class="d4-headline">Um estilo de edição<br>que marca</h2>
+      </div>
+      <div class="d4-list">
+        <div class="d4-item"><img src="comentarios/Comentário 1.jpg" alt=""></div>
+        <div class="d4-item"><img src="comentarios/Comentário 2.jpg" alt=""></div>
+        <div class="d4-item"><img src="comentarios/Comentário 3.jpg" alt=""></div>
+        <div class="d4-item"><img src="comentarios/Comentário 4.jpg" alt=""></div>
+        <div class="d4-item"><img src="comentarios/Comentário 5.jpg" alt=""></div>
+        <div class="d4-item"><img src="comentarios/Comentário 6.jpg" alt=""></div>
+        <div class="d4-item"><img src="comentarios/Comentário 7.jpg" alt=""></div>
+        <div class="d4-item"><img src="comentarios/Comentário 8.jpg" alt=""></div>
+        <div class="d4-item"><img src="comentarios/Comentário 9.jpg" alt=""></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dobra 5 — Oferta -->
+  <section class="dobra5" id="oferta">
+    <span class="d5-label">O que você leva</span>
+    <p class="d5-product">Pacote Presets de Cinema</p>
+    <p class="d5-bonus">+ Bônus Workshop de Edição</p>
+    <div class="d5-rule"><div class="d5-rule-dot"></div></div>
+    <p class="d5-price-parcel">12x de <strong>R$30</strong></p>
+    <p class="d5-price-avista">ou R$297 à vista</p>
+    <button class="d5-btn" id="oferta-cta">Comprar presets</button>
+    <div class="garantia">
+      <span class="garantia-item">Acesso Imediato</span>
+      <div class="garantia-sep"></div>
+      <span class="garantia-item">Garantia de 7 dias</span>
+    </div>
+  </section>
+
+  <!-- Dobra Felipe -->
+  <section class="dobra-felipe">
+    <img class="felipe-foto" src="felipe.jpg" alt="Felipe Pick">
+    <div class="felipe-texto">
+      <span class="felipe-label">Quem sou eu</span>
+      <h2 class="felipe-nome">Felipe Pick · Fotógrafo</h2>
+      <div class="felipe-bio">
+        <p>Tenho 24 anos e sou fotógrafo especializado em ensaios de casal, família e casamentos com identidade cinematográfica.</p>
+        <p>Desde pequeno assistia até 3 filmes por dia. Quando comecei a fotografar, fui naturalmente levando as técnicas e a linguagem do cinema para os meus ensaios, até que as pessoas começaram a me perguntar como eu fazia pra que minhas fotos parecessem cenas de filme.</p>
+        <p>A edição sempre foi a parte central dessa resposta.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Rodapé — Dúvidas -->
+  <footer class="rodape">
+    <p>Tem alguma dúvida? <a href="https://wa.me/5561996179972?text=Oii%2C%20Tiago%21%20Tenho%20uma%20d%C3%BAvida%20sobre%20os%20presets%20%3A%29" target="_blank" rel="noopener">Clique aqui</a> e fale com o Tiago da minha equipe :)</p>
+  </footer>
+
+  <script>
+    (function () {
+      const state = { photo: 1, preset: 0 }; // preset 0 = original
+
+      function imgSrc(photo, preset) {
+        if (preset === 0) return `presets/Original ${photo}.jpg`;
+        return `presets/Original ${photo} - Preset ${preset}.jpg`;
+      }
+
+      // Renderiza os 10 dots (0=original, 1-9=presets)
+      const dotsEl = document.getElementById('d2-dots');
+      for (let i = 0; i <= 9; i++) {
+        const btn = document.createElement('button');
+        btn.className = 'd2-dot' + (i === 0 ? ' active' : '');
+        btn.setAttribute('data-index', i);
+        btn.setAttribute('aria-label', i === 0 ? 'Original' : `Preset ${i}`);
+        btn.addEventListener('click', () => { state.preset = i; update(); });
+        dotsEl.appendChild(btn);
+      }
+
+      function update(animate = true) {
+        const img         = document.getElementById('d2-img');
+        const badge       = document.getElementById('d2-badge');
+        const counter     = document.getElementById('d2-counter');
+        const photoLabel  = document.getElementById('d2-photo-label');
+
+        if (animate) {
+          img.classList.add('fading');
+          setTimeout(() => {
+            img.src = imgSrc(state.photo, state.preset);
+            img.classList.remove('fading');
+          }, 180);
+        } else {
+          img.src = imgSrc(state.photo, state.preset);
+        }
+
+        badge.textContent      = state.preset === 0 ? 'Original' : `Preset ${state.preset}`;
+        counter.textContent    = state.preset === 0 ? 'Original' : `Preset ${state.preset} de 9`;
+        photoLabel.textContent = `Foto ${state.photo} de 6`;
+
+        document.querySelectorAll('.d2-dot').forEach((el) => {
+          el.classList.toggle('active', parseInt(el.dataset.index) === state.preset);
+        });
+      }
+
+      // Setas de preset
+      document.getElementById('d2-prev').addEventListener('click', () => {
+        state.preset = state.preset > 0 ? state.preset - 1 : 9;
+        update();
+      });
+      document.getElementById('d2-next').addEventListener('click', () => {
+        state.preset = state.preset < 9 ? state.preset + 1 : 0;
+        update();
+      });
+
+      // Setas de foto
+      document.getElementById('d2-photo-prev').addEventListener('click', () => {
+        state.photo = state.photo > 1 ? state.photo - 1 : 6;
+        update();
+      });
+      document.getElementById('d2-photo-next').addEventListener('click', () => {
+        state.photo = state.photo < 6 ? state.photo + 1 : 1;
+        update();
+      });
+
+      // Swipe no viewer — horizontal: preset / vertical: foto
+      const viewer = document.getElementById('d2-viewer');
+      let touchStartX = 0, touchStartY = 0;
+
+      viewer.addEventListener('touchstart', (e) => {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+      }, { passive: true });
+
+      viewer.addEventListener('touchend', (e) => {
+        const dx = e.changedTouches[0].clientX - touchStartX;
+        const dy = e.changedTouches[0].clientY - touchStartY;
+        if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
+          // Swipe horizontal → preset
+          state.preset = dx < 0
+            ? (state.preset < 9 ? state.preset + 1 : 0)
+            : (state.preset > 0 ? state.preset - 1 : 9);
+          update();
+        } else if (Math.abs(dy) > Math.abs(dx) && Math.abs(dy) > 40) {
+          // Swipe vertical → foto
+          state.photo = dy < 0
+            ? (state.photo < 6 ? state.photo + 1 : 1)
+            : (state.photo > 1 ? state.photo - 1 : 6);
+          update();
+        }
+      }, { passive: true });
+
+      // Teclado
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight') { state.preset = state.preset < 9 ? state.preset + 1 : 0; update(); }
+        if (e.key === 'ArrowLeft')  { state.preset = state.preset > 0 ? state.preset - 1 : 9; update(); }
+        if (e.key === 'ArrowUp')    { state.photo = state.photo > 1 ? state.photo - 1 : 6; update(); }
+        if (e.key === 'ArrowDown')  { state.photo = state.photo < 6 ? state.photo + 1 : 1; update(); }
+      });
+
+      update(false);
+    })();
+
+    // ── Modal de lead ──────────────────────────────
+    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwjWM1uTkwpDql_W3NzSZKxXniZ1wttJKgnkPq8wNOJpw1oI4-SdAwI-1psnB6E3Vwr/exec';
+    const HOTMART_URL     = 'https://pay.hotmart.com/P106406629E?off=nhwek9mh';
+
+    const modal      = document.getElementById('modal');
+    const form       = document.getElementById('lead-form');
+    const submitBtn  = document.getElementById('modal-submit');
+    const msg        = document.getElementById('modal-msg');
+
+    function openModal() { modal.classList.add('open'); }
+    function closeModal() { modal.classList.remove('open'); }
+
+    document.getElementById('oferta-cta').addEventListener('click', openModal);
+    document.getElementById('modal-close').addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+
+    // Botão da hero só abre modal se já passou pela seção de oferta (scroll)
+    document.getElementById('hero-cta').addEventListener('click', (e) => {
+      const oferta = document.getElementById('oferta');
+      const rect = oferta.getBoundingClientRect();
+      if (rect.top > 0) return; // deixa ir pra seção normalmente
+      e.preventDefault();
+      openModal();
+    });
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Enviando...';
+      msg.textContent = '';
+
+      const payload = {
+        nome:      form.nome.value.trim(),
+        email:     form.email.value.trim(),
+        telefone:  form.telefone.value.trim(),
+      };
+
+      try {
+        await fetch(APPS_SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+      } catch (_) { /* segue mesmo com erro de rede */ }
+
+      msg.textContent = 'Redirecionando...';
+      setTimeout(() => { window.location.href = HOTMART_URL; }, 800);
+    });
+
+    // ── Favicon emoji ──────────────────────────────
+    (function() {
+      const canvas = document.createElement('canvas');
+      canvas.width = 32; canvas.height = 32;
+      const ctx = canvas.getContext('2d');
+      ctx.font = '26px serif';
+      ctx.fillText('📸', 2, 26);
+      document.getElementById('favicon').href = canvas.toDataURL();
+    })();
+
+    // ── Máscara de telefone ────────────────────────
+    const countrySelect = document.getElementById('country-code');
+    const telInput      = document.getElementById('telefone-input');
+
+    const masks = {
+      br:      { placeholder: '(00) 00000-0000', apply: v => {
+        v = v.replace(/\D/g,'').slice(0,11);
+        if (v.length > 7) return `(${v.slice(0,2)}) ${v.slice(2,7)}-${v.slice(7)}`;
+        if (v.length > 2) return `(${v.slice(0,2)}) ${v.slice(2)}`;
+        if (v.length > 0) return `(${v}`;
+        return v;
+      }},
+      pt:      { placeholder: '000 000 000', apply: v => {
+        v = v.replace(/\D/g,'').slice(0,9);
+        if (v.length > 6) return `${v.slice(0,3)} ${v.slice(3,6)} ${v.slice(6)}`;
+        if (v.length > 3) return `${v.slice(0,3)} ${v.slice(3)}`;
+        return v;
+      }},
+      us:      { placeholder: '(000) 000-0000', apply: v => {
+        v = v.replace(/\D/g,'').slice(0,10);
+        if (v.length > 6) return `(${v.slice(0,3)}) ${v.slice(3,6)}-${v.slice(6)}`;
+        if (v.length > 3) return `(${v.slice(0,3)}) ${v.slice(3)}`;
+        if (v.length > 0) return `(${v}`;
+        return v;
+      }},
+      generic: { placeholder: '000 000 0000', apply: v => {
+        v = v.replace(/\D/g,'').slice(0,12);
+        return v.replace(/(\d{3})(?=\d)/g,'$1 ').trim();
+      }},
+    };
+
+    function applyMask() {
+      const mask = masks[countrySelect.selectedOptions[0].dataset.mask] || masks.generic;
+      telInput.placeholder = mask.placeholder;
+      telInput.value       = mask.apply(telInput.value);
+    }
+
+    telInput.addEventListener('input', () => {
+      const mask = masks[countrySelect.selectedOptions[0].dataset.mask] || masks.generic;
+      const pos  = telInput.selectionStart;
+      telInput.value = mask.apply(telInput.value);
+      telInput.setSelectionRange(pos, pos);
+    });
+
+    countrySelect.addEventListener('change', () => {
+      telInput.value = '';
+      applyMask();
+      telInput.focus();
+    });
+
+    // Inclui o código do país no valor enviado
+    form.addEventListener('submit', (e) => {
+      const raw = telInput.value.replace(/\D/g,'');
+      telInput.value = countrySelect.value + raw;
+    }, { capture: true });
+
+    // Animação de scroll nos comentários
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.d4-item').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
