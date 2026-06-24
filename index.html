@@ -1293,9 +1293,9 @@
 
     telInput.addEventListener('input', () => {
       const mask = masks[countrySelect.selectedOptions[0].dataset.mask] || masks.generic;
-      const pos  = telInput.selectionStart;
       telInput.value = mask.apply(telInput.value);
-      telInput.setSelectionRange(pos, pos);
+      const len = telInput.value.length;
+      telInput.setSelectionRange(len, len);
     });
 
     countrySelect.addEventListener('change', () => {
