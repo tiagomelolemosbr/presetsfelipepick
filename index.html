@@ -952,11 +952,6 @@
           </select>
           <input type="tel" id="telefone-input" name="telefone" placeholder="(00) 00000-0000" required autocomplete="tel">
         </div>
-        <input type="hidden" name="utm_source"   id="utm_source">
-        <input type="hidden" name="utm_medium"   id="utm_medium">
-        <input type="hidden" name="utm_campaign" id="utm_campaign">
-        <input type="hidden" name="utm_content"  id="utm_content">
-        <input type="hidden" name="utm_term"     id="utm_term">
         <button type="submit" class="modal-submit" id="modal-submit">Ir para o pagamento</button>
         <p class="modal-msg" id="modal-msg"></p>
       </form>
@@ -1213,11 +1208,11 @@
         nome:         form.nome.value.trim(),
         email:        form.email.value.trim(),
         telefone:     form.telefone.value.trim(),
-        utm_source:   form.utm_source.value,
-        utm_medium:   form.utm_medium.value,
-        utm_campaign: form.utm_campaign.value,
-        utm_content:  form.utm_content.value,
-        utm_term:     form.utm_term.value,
+        utm_source:   getUTM('utm_source'),
+        utm_medium:   getUTM('utm_medium'),
+        utm_campaign: getUTM('utm_campaign'),
+        utm_content:  getUTM('utm_content'),
+        utm_term:     getUTM('utm_term'),
       };
 
       try {
@@ -1237,12 +1232,14 @@
     (function() {
       const params = new URLSearchParams(window.location.search);
       ['utm_source','utm_medium','utm_campaign','utm_content','utm_term'].forEach(function(key) {
-        var val = params.get(key) || sessionStorage.getItem(key) || '';
+        const val = params.get(key);
         if (val) sessionStorage.setItem(key, val);
-        var el = document.getElementById(key);
-        if (el) el.value = val;
       });
     })();
+
+    function getUTM(key) {
+      return sessionStorage.getItem(key) || new URLSearchParams(window.location.search).get(key) || '';
+    }
 
     // ── Favicon emoji ──────────────────────────────
     (function() {
@@ -1303,14 +1300,6 @@
       applyMask();
       telInput.focus();
     });
-
-    // Preenche UTMs ocultos antes de enviar
-    form.addEventListener('submit', function() {
-      ['utm_source','utm_medium','utm_campaign','utm_content','utm_term'].forEach(function(key) {
-        var el = document.getElementById(key);
-        if (el && !el.value) el.value = sessionStorage.getItem(key) || '';
-      });
-    }, { capture: true });
 
     // Inclui o código do país no valor enviado
     form.addEventListener('submit', (e) => {
