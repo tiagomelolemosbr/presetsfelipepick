@@ -1247,11 +1247,8 @@
     modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
 
     document.getElementById('hero-cta').addEventListener('click', (e) => {
-      const oferta = document.getElementById('offer');
-      const rect = oferta.getBoundingClientRect();
-      if (rect.top > 0) return;
       e.preventDefault();
-      openModal();
+      document.getElementById('offer').scrollIntoView({ behavior: 'smooth' });
     });
 
     form.addEventListener('submit', async (e) => {
