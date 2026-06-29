@@ -1250,7 +1250,7 @@
       } catch (_) { /* segue mesmo com erro de rede */ }
 
       msg.textContent = 'Redirecionando...';
-      setTimeout(() => { window.location.href = HOTMART_URL; }, 800);
+      setTimeout(() => { window.location.href = buildUrlWithParams(HOTMART_URL); }, 800);
     });
 
     // ── Captura UTMs da URL ────────────────────────
@@ -1259,6 +1259,21 @@
       ['utm_source','utm_medium','utm_campaign','utm_content','utm_term'].forEach(function(key) {
         const val = params.get(key);
         if (val) sessionStorage.setItem(key, val);
+      });
+    })();
+
+    function buildUrlWithParams(baseUrl) {
+      const currentParams = new URLSearchParams(window.location.search);
+      if (!currentParams.toString()) return baseUrl;
+      const url = new URL(baseUrl);
+      currentParams.forEach((value, key) => url.searchParams.set(key, value));
+      return url.toString();
+    }
+
+    // Propaga parâmetros de URL para o link do WhatsApp
+    (function() {
+      document.querySelectorAll('a[href^="https://wa.me/"]').forEach(function(el) {
+        el.href = buildUrlWithParams(el.href);
       });
     })();
 
