@@ -637,6 +637,28 @@
       text-transform: uppercase;
     }
 
+    .d5-coupon-card {
+      display: inline-block;
+      margin: 0 auto 28px;
+      padding: 10px 22px;
+      border: 0.5px solid rgba(196,169,106,0.4);
+      background: rgba(196,169,106,0.08);
+    }
+
+    .d5-coupon-card span {
+      font-family: 'Jost', sans-serif;
+      font-size: 11px;
+      font-weight: 300;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--sombra);
+    }
+
+    .d5-coupon-card strong {
+      color: var(--golden);
+      font-weight: 400;
+    }
+
     .d5-btn {
       display: block;
       width: 100%;
@@ -1084,7 +1106,8 @@
     <div class="d5-rule"><div class="d5-rule-dot"></div></div>
     <p class="d5-price-parcel">12x de <strong>R$15</strong></p>
     <p class="d5-price-avista">ou R$148 à vista</p>
-    <button class="d5-btn" id="oferta-cta">Comprar presets</button>
+    <div class="d5-coupon-card"><span>Valor com o cupom <strong>CINEMA</strong></span></div>
+    <button class="d5-btn" id="oferta-cta">Garantir desconto de 50%</button>
     <div class="garantia">
       <span class="garantia-item">Acesso Imediato</span>
       <div class="garantia-sep"></div>
