@@ -48,7 +48,7 @@
       --noite:      #3D2E1A;
       --raiz:       #6B5E48;
       --luz-difusa: #C4B49A;
-      --bar-h:      42px;
+      --bar-h:      50px;
     }
 
     html { scroll-behavior: smooth; }
@@ -66,13 +66,15 @@
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 200;
-      height: var(--bar-h);
+      min-height: var(--bar-h);
       background: var(--terra);
       border-bottom: 0.5px solid rgba(196,180,154,0.25);
       display: flex;
+      flex-wrap: wrap;
       align-items: center;
       justify-content: center;
-      padding: 0 20px;
+      gap: 6px 16px;
+      padding: 8px 20px;
       text-align: center;
     }
 
@@ -90,6 +92,23 @@
       color: var(--golden);
       letter-spacing: 0.18em;
     }
+
+    .cupom-bar-btn {
+      font-family: 'Jost', sans-serif;
+      font-size: 9px;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      background: var(--golden);
+      color: var(--terra);
+      border: none;
+      padding: 6px 14px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: opacity 0.2s ease;
+    }
+
+    .cupom-bar-btn:active { opacity: 0.85; }
 
     /* ── Hero ──────────────────────────────────────── */
     .hero {
@@ -1017,7 +1036,8 @@
 
   <!-- Barra de cupom fixa -->
   <div class="cupom-bar">
-    <p>Use o cupom <strong>CINEMA</strong> e ganhe 50% OFF</p>
+    <p>Cupom <strong>CINEMA</strong> · 50% OFF</p>
+    <button class="cupom-bar-btn" id="cupom-bar-cta">Garantir Presets</button>
   </div>
 
   <!-- Dobra 1 — Hero -->
@@ -1240,11 +1260,14 @@
     document.getElementById('modal-close').addEventListener('click', closeModal);
     modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
 
-    // Botão da hero só abre modal se já passou pela seção de oferta (scroll)
-    document.getElementById('hero-cta').addEventListener('click', (e) => {
+    // Botões que levam até a oferta — block: 'center' garante que o preço
+    // fique visível mesmo em telas baixas, onde 'start' deixava o preço fora da viewport
+    function scrollToOferta(e) {
       e.preventDefault();
-      document.getElementById('oferta').scrollIntoView({ behavior: 'smooth' });
-    });
+      document.getElementById('oferta').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    document.getElementById('hero-cta').addEventListener('click', scrollToOferta);
+    document.getElementById('cupom-bar-cta').addEventListener('click', scrollToOferta);
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
