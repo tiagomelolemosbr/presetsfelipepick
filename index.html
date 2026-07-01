@@ -631,6 +631,20 @@
       flex-shrink: 0;
     }
 
+    .d5-price-old {
+      font-family: 'Jost', sans-serif;
+      font-size: 12px;
+      font-weight: 300;
+      letter-spacing: 0.06em;
+      color: var(--sombra);
+      opacity: 0.6;
+      margin-bottom: 4px;
+    }
+
+    .d5-price-old s {
+      text-decoration-color: var(--sombra);
+    }
+
     .d5-price-parcel {
       font-family: 'Jost', sans-serif;
       font-size: 13px;
@@ -1036,7 +1050,7 @@
 
   <!-- Barra de cupom fixa -->
   <div class="cupom-bar">
-    <p>Cupom <strong>CINEMA</strong> · 50% OFF</p>
+    <p><strong>50% de DESCONTO</strong> no Lançamento</p>
     <button class="cupom-bar-btn" id="cupom-bar-cta">Garantir Presets</button>
   </div>
 
@@ -1124,9 +1138,10 @@
     <p class="d5-product">Pacote Presets de Cinema</p>
     <p class="d5-bonus">+ Bônus Workshop de Edição</p>
     <div class="d5-rule"><div class="d5-rule-dot"></div></div>
-    <p class="d5-price-parcel">12x de <strong>R$15</strong></p>
-    <p class="d5-price-avista">ou R$148 à vista</p>
-    <div class="d5-coupon-card"><span>Valor com o cupom <strong>CINEMA</strong></span></div>
+    <p class="d5-price-old">De <s>R$297</s></p>
+    <p class="d5-price-parcel">por 12x de <strong>R$15</strong></p>
+    <p class="d5-price-avista">ou R$149 à vista</p>
+    <div class="d5-coupon-card"><span>50% de DESCONTO no Lançamento</span></div>
     <button class="d5-btn" id="oferta-cta">Garantir desconto de 50%</button>
     <div class="garantia">
       <span class="garantia-item">Acesso Imediato</span>
@@ -1246,7 +1261,7 @@
 
     // ── Modal de lead ──────────────────────────────
     const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzNaI3YFIi2VcRO_A_TIZ--mhjPPRjLlpJdR-jKyeooAUV4kb3_xJ6oRvfhJLtXVlHt/exec';
-    const HOTMART_URL     = 'https://pay.hotmart.com/P106406629E?off=nhwek9mh';
+    const HOTMART_URL     = 'https://pay.hotmart.com/P106406629E';
 
     const modal      = document.getElementById('modal');
     const form       = document.getElementById('lead-form');
