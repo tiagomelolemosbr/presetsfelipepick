@@ -28,6 +28,7 @@
 </script>
 <!-- End Microsoft Clarity -->
   <script src="https://cdn.utmify.com.br/scripts/utms/latest.js" data-utmify-prevent-subids async defer></script>
+  <script async src="https://tally.so/widgets/embed.js"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Presets de Cinema by Felipe Pick</title>
@@ -777,160 +778,6 @@
       white-space: nowrap;
     }
 
-    /* ── Modal de lead ────────────────────────────── */
-    .modal-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      z-index: 500;
-      background: rgba(12,11,10,0.88);
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-    }
-
-    .modal-overlay.open { display: flex; }
-
-    .modal-box {
-      background: var(--terra);
-      border: 0.5px solid rgba(196,180,154,0.2);
-      width: 100%;
-      max-width: 400px;
-      padding: 40px 28px 36px;
-      position: relative;
-    }
-
-    .modal-close {
-      position: absolute;
-      top: 14px;
-      right: 16px;
-      background: none;
-      border: none;
-      color: var(--sombra);
-      font-size: 22px;
-      cursor: pointer;
-      line-height: 1;
-      padding: 4px;
-    }
-
-    .modal-label {
-      display: block;
-      font-family: 'Jost', sans-serif;
-      font-size: 9px;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--golden);
-      font-weight: 400;
-      margin-bottom: 12px;
-    }
-
-    .modal-title {
-      font-family: 'Bodoni Moda', serif;
-      font-weight: 400;
-      font-size: clamp(22px, 6vw, 30px);
-      line-height: 1.1;
-      color: var(--pelicula);
-      margin-bottom: 28px;
-    }
-
-    .modal-form {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .modal-form input {
-      background: rgba(242,234,216,0.05);
-      border: 0.5px solid rgba(196,180,154,0.25);
-      color: var(--pelicula);
-      font-family: 'Jost', sans-serif;
-      font-size: 13px;
-      font-weight: 300;
-      padding: 14px 16px;
-      outline: none;
-      width: 100%;
-      transition: border-color 0.2s ease;
-      -webkit-appearance: none;
-      border-radius: 0;
-    }
-
-    .modal-form input::placeholder {
-      color: var(--sombra);
-      letter-spacing: 0.04em;
-    }
-
-    .modal-form input:focus {
-      border-color: rgba(196,180,154,0.6);
-    }
-
-    .modal-submit {
-      margin-top: 4px;
-      font-family: 'Jost', sans-serif;
-      font-size: 11px;
-      font-weight: 400;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      background: var(--golden);
-      color: var(--terra);
-      border: none;
-      padding: 17px 28px;
-      cursor: pointer;
-      width: 100%;
-      transition: opacity 0.2s ease;
-    }
-
-    .modal-submit:disabled { opacity: 0.6; cursor: default; }
-
-    .modal-msg {
-      margin-top: 14px;
-      font-family: 'Jost', sans-serif;
-      font-size: 11px;
-      font-weight: 300;
-      letter-spacing: 0.06em;
-      color: var(--sombra);
-      text-align: center;
-    }
-
-    /* Campo de telefone com seletor de país */
-    .phone-row {
-      display: flex;
-      gap: 0;
-    }
-
-    .country-select {
-      background: rgba(242,234,216,0.05);
-      border: 0.5px solid rgba(196,180,154,0.25);
-      border-right: none;
-      color: var(--pelicula);
-      font-family: 'Jost', sans-serif;
-      font-size: 13px;
-      font-weight: 300;
-      padding: 14px 10px;
-      outline: none;
-      cursor: pointer;
-      flex-shrink: 0;
-      width: 100px;
-      -webkit-appearance: none;
-      appearance: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%238A7E6A'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 8px center;
-      padding-right: 22px;
-      border-radius: 0;
-    }
-
-    .country-select:focus { border-color: rgba(196,180,154,0.6); }
-
-    .country-select option {
-      background: #1C1A14;
-      color: #F2EAD8;
-    }
-
-    .phone-row input {
-      flex: 1;
-      border-left: none !important;
-    }
-
     /* ── Dobra 3 — Bônus ───────────────────────────── */
     .dobra3 {
       position: relative;
@@ -1019,34 +866,6 @@
   </style>
 </head>
 <body>
-
-<!-- Modal de lead -->
-  <div class="modal-overlay" id="modal">
-    <div class="modal-box">
-      <button class="modal-close" id="modal-close">&#215;</button>
-      <span class="modal-label">Quase lá</span>
-      <h3 class="modal-title">Antes de ir<br>para o pagamento</h3>
-      <form class="modal-form" id="lead-form">
-        <input type="text"  name="nome"     placeholder="Seu nome"       required autocomplete="name">
-        <input type="email" name="email"    placeholder="Seu e-mail"     required autocomplete="email">
-        <div class="phone-row">
-          <select class="country-select" id="country-code">
-            <option value="+55"  data-mask="br"      selected>🇧🇷 +55</option>
-            <option value="+351" data-mask="pt"             >🇵🇹 +351</option>
-            <option value="+1"   data-mask="us"             >🇺🇸 +1</option>
-            <option value="+54"  data-mask="generic"        >🇦🇷 +54</option>
-            <option value="+57"  data-mask="generic"        >🇨🇴 +57</option>
-            <option value="+34"  data-mask="generic"        >🇪🇸 +34</option>
-            <option value="+44"  data-mask="generic"        >🇬🇧 +44</option>
-            <option value="+49"  data-mask="generic"        >🇩🇪 +49</option>
-          </select>
-          <input type="tel" id="telefone-input" name="telefone" placeholder="(00) 00000-0000" required autocomplete="tel">
-        </div>
-        <button type="submit" class="modal-submit" id="modal-submit">Ir para o pagamento</button>
-        <p class="modal-msg" id="modal-msg"></p>
-      </form>
-    </div>
-  </div>
 
   <!-- Barra de cupom fixa -->
   <div class="cupom-bar">
@@ -1142,7 +961,7 @@
     <p class="d5-price-parcel">por 12x de <strong>R$15</strong></p>
     <p class="d5-price-avista">ou R$149 à vista</p>
     <div class="d5-coupon-card"><span>50% de DESCONTO no Lançamento</span></div>
-    <button class="d5-btn" id="oferta-cta">Garantir desconto de 50%</button>
+    <button class="d5-btn" data-tally-open="gDp101" data-tally-layout="modal" data-tally-emoji-animation="none" data-tally-form-events-forwarding="1">Garantir desconto de 50%</button>
     <div class="garantia">
       <span class="garantia-item">Acesso Imediato</span>
       <div class="garantia-sep"></div>
@@ -1259,21 +1078,8 @@
       setPreset(1);
     })();
 
-    // ── Modal de lead ──────────────────────────────
-    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzNaI3YFIi2VcRO_A_TIZ--mhjPPRjLlpJdR-jKyeooAUV4kb3_xJ6oRvfhJLtXVlHt/exec';
-    const HOTMART_URL     = 'https://pay.hotmart.com/P106406629E';
-
-    const modal      = document.getElementById('modal');
-    const form       = document.getElementById('lead-form');
-    const submitBtn  = document.getElementById('modal-submit');
-    const msg        = document.getElementById('modal-msg');
-
-    function openModal() { modal.classList.add('open'); }
-    function closeModal() { modal.classList.remove('open'); }
-
-    document.getElementById('oferta-cta').addEventListener('click', openModal);
-    document.getElementById('modal-close').addEventListener('click', closeModal);
-    modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+    // ── Tally: abre popup e redireciona pro checkout após envio ──
+    const HOTMART_URL = 'https://pay.hotmart.com/P106406629E';
 
     // Botões que levam até a oferta — block: 'center' garante que o preço
     // fique visível mesmo em telas baixas, onde 'start' deixava o preço fora da viewport
@@ -1284,44 +1090,13 @@
     document.getElementById('hero-cta').addEventListener('click', scrollToOferta);
     document.getElementById('cupom-bar-cta').addEventListener('click', scrollToOferta);
 
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Enviando...';
-      msg.textContent = '';
-
-      const payload = {
-        nome:         form.nome.value.trim(),
-        email:        form.email.value.trim(),
-        telefone:     form.telefone.value.trim(),
-        utm_source:   getUTM('utm_source'),
-        utm_medium:   getUTM('utm_medium'),
-        utm_campaign: getUTM('utm_campaign'),
-        utm_content:  getUTM('utm_content'),
-        utm_term:     getUTM('utm_term'),
-      };
-
-      try {
-        await fetch(APPS_SCRIPT_URL, {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload),
-        });
-      } catch (_) { /* segue mesmo com erro de rede */ }
-
-      msg.textContent = 'Redirecionando...';
-      setTimeout(() => { window.location.href = buildUrlWithParams(HOTMART_URL); }, 800);
+    window.addEventListener('message', (e) => {
+      let data = e.data;
+      try { data = typeof data === 'string' ? JSON.parse(data) : data; } catch (_) { return; }
+      if (data && data.event === 'Tally.FormSubmitted') {
+        setTimeout(() => { window.location.href = buildUrlWithParams(HOTMART_URL); }, 800);
+      }
     });
-
-    // ── Captura UTMs da URL ────────────────────────
-    (function() {
-      const params = new URLSearchParams(window.location.search);
-      ['utm_source','utm_medium','utm_campaign','utm_content','utm_term'].forEach(function(key) {
-        const val = params.get(key);
-        if (val) sessionStorage.setItem(key, val);
-      });
-    })();
 
     function buildUrlWithParams(baseUrl) {
       const currentParams = new URLSearchParams(window.location.search);
@@ -1338,10 +1113,6 @@
       });
     })();
 
-    function getUTM(key) {
-      return sessionStorage.getItem(key) || new URLSearchParams(window.location.search).get(key) || '';
-    }
-
     // ── Favicon emoji ──────────────────────────────
     (function() {
       const canvas = document.createElement('canvas');
@@ -1351,62 +1122,6 @@
       ctx.fillText('📸', 2, 26);
       document.getElementById('favicon').href = canvas.toDataURL();
     })();
-
-    // ── Máscara de telefone ────────────────────────
-    const countrySelect = document.getElementById('country-code');
-    const telInput      = document.getElementById('telefone-input');
-
-    const masks = {
-      br:      { placeholder: '(00) 00000-0000', apply: v => {
-        v = v.replace(/\D/g,'').slice(0,11);
-        if (v.length > 7) return `(${v.slice(0,2)}) ${v.slice(2,7)}-${v.slice(7)}`;
-        if (v.length > 2) return `(${v.slice(0,2)}) ${v.slice(2)}`;
-        if (v.length > 0) return `(${v}`;
-        return v;
-      }},
-      pt:      { placeholder: '000 000 000', apply: v => {
-        v = v.replace(/\D/g,'').slice(0,9);
-        if (v.length > 6) return `${v.slice(0,3)} ${v.slice(3,6)} ${v.slice(6)}`;
-        if (v.length > 3) return `${v.slice(0,3)} ${v.slice(3)}`;
-        return v;
-      }},
-      us:      { placeholder: '(000) 000-0000', apply: v => {
-        v = v.replace(/\D/g,'').slice(0,10);
-        if (v.length > 6) return `(${v.slice(0,3)}) ${v.slice(3,6)}-${v.slice(6)}`;
-        if (v.length > 3) return `(${v.slice(0,3)}) ${v.slice(3)}`;
-        if (v.length > 0) return `(${v}`;
-        return v;
-      }},
-      generic: { placeholder: '000 000 0000', apply: v => {
-        v = v.replace(/\D/g,'').slice(0,12);
-        return v.replace(/(\d{3})(?=\d)/g,'$1 ').trim();
-      }},
-    };
-
-    function applyMask() {
-      const mask = masks[countrySelect.selectedOptions[0].dataset.mask] || masks.generic;
-      telInput.placeholder = mask.placeholder;
-      telInput.value       = mask.apply(telInput.value);
-    }
-
-    telInput.addEventListener('input', () => {
-      const mask = masks[countrySelect.selectedOptions[0].dataset.mask] || masks.generic;
-      telInput.value = mask.apply(telInput.value);
-      const len = telInput.value.length;
-      telInput.setSelectionRange(len, len);
-    });
-
-    countrySelect.addEventListener('change', () => {
-      telInput.value = '';
-      applyMask();
-      telInput.focus();
-    });
-
-    // Inclui o código do país no valor enviado
-    form.addEventListener('submit', (e) => {
-      const raw = telInput.value.replace(/\D/g,'');
-      telInput.value = countrySelect.value + raw;
-    }, { capture: true });
 
     // ── Lazy load de backgrounds ───────────────────
     const bgObserver = new IntersectionObserver((entries) => {
